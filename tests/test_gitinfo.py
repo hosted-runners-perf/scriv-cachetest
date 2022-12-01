@@ -62,13 +62,3 @@ def test_get_github_repo_no_github_remotes(fake_git):
     fake_git.add_remote("mygitlab", "git@gitlab.com:joe/myproject.git")
     fake_git.add_remote("upstream", "git@gitlab.com:psf/myproject.git")
     assert get_github_repo() is None
-
-
-def test_real_get_github_repo():
-    # Since we don't know the name of this repo (forks could be anything),
-    # we can't be sure what we get, except it should be word/word, and not end
-    # with .git
-    repo = get_github_repo()
-    assert repo is not None
-    assert re.fullmatch(r"\w+/\w+", repo)
-    assert not repo.endswith(".git")
